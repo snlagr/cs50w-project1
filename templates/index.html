@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+</head>
+<body>
+	<main>
+
+		<header class="searchForm-container">
+
+			<div style="font-family: 'Beth Ellen', cursive; font-size: 250%; text-align: center; color: white">Another Book Review</div>
+
+			<form class="searchForm" action="/" method="post">
+				<input type="search" class="searchForm-input" placeholder="Search for a book" name="query">
+
+				<button type="submit" class="icon searchIcon">
+	          		<img src="https://image.ibb.co/cpG8zk/search.png" alt="Magnifying Glass Icon">
+	        	</button>
+			</form>
+
+			<a class="logout" href="{{ url_for('signlog') }}">Logout {{ username }}?</a>
+		</header>
+
+		<section class="searchResults">
+
+		{% if results %}
+		  {% for result in results %}
+		  	<div class="resultItem">
+
+	    	<h3 class="resultItem-title">{{ result[2] }}</h3>
+
+			<span class="resultItem-snippet">By {{ result[3] }} in the year {{ result[4] }}. ISBN: {{ result[1] }}</span><br>
+		
+			<a href="/book/{{result[0]}}" class="resultItem-link" rel="noopener">More details</a>
+	    
+	    	</div>
+
+		  {% endfor %}
+
+		{% else %}
+
+			<div class="resultItem">
+
+	    	<h3 class="resultItem-title">So Empty Here</h3>
+
+			<span class="resultItem-snippet">No results! Search for a book by Name, ISBN Number, Author or Release Year :)</span><br>
+		
+			<a href="http://iamawesome.com" class="resultItem-link" rel="noopener">And remember you are awesome.</a>
+	    
+	    	</div>
+
+		{% endif %}
+
+		</section>
+
+	</main>
+</body>
+</html>

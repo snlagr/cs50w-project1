@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Beth+Ellen&display=swap" rel="stylesheet">
+</head>
+<body style="background-color: #333">
+
+    <main>
+
+       
+
+    </main>
+
+<div class="container">
+<div style="font-family: 'Beth Ellen', cursive; font-size: 250%; text-align: center; color: white">Another Book Review</div>
+<br>
+<div class="row">
+<div class="col-12">
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-dark alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{ message }}
+        </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+</div>
+
+
+{% if book %}
+
+<div class="card-columns">
+
+
+<div class="card bg-light mb-3 mx-auto" style="max-width: 22rem;">
+  <div class="card-header">Book Details</div>
+  <div class="card-body">
+    <h5 class="card-title">{{ book[2] }}</h5>
+    <p class="card-text">This book is written by {{ book[3] }} in the year {{ book[4] }}. It has been rated by {{ book[5] }} people on <a href="https://www.goodreads.com/book/show/{{book[7]}}">Goodreads</a> with an average rating of {{ book[6] }}. It's ISBN number is {{ book[1] }}</p>
+  </div>
+</div>
+
+
+<div class="card text-white bg-secondary mb-3 mx-auto" style="max-width: 22rem;">
+  <div class="card-header">Give a rating</div>
+  <div class="card-body">
+    <form action="/review" method="post">
+    <h6 class="card-title">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+          <label class="form-check-label" for="inlineRadio1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+          <label class="form-check-label" for="inlineRadio2">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3">
+          <label class="form-check-label" for="inlineRadio3">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="4">
+          <label class="form-check-label" for="inlineRadio3">4</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="5" checked="1">
+          <label class="form-check-label" for="inlineRadio3">5</label>
+        </div>
+    </h6>
+    <p class="card-text">
+        <div class="form-group">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="feedback"></textarea>
+        </div>
+    </p>
+    <input type="hidden" id="custId" name="bookid" value="{{ book[0] }}">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+{% for rating, theme in ratings %}
+<div class="card text-white {{theme}} mb-3 mx-auto" style="max-width: 22rem;">
+    <div class="card-header">@{{rating[2]}} says...</div>
+        <div class="card-body">
+        <h5 class="card-title">{{rating[3]}} stars!</h5>
+        <p class="card-text">{{rating[4]}}</p>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+{% endif %}
+
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
